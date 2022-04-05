@@ -12,7 +12,7 @@ public:
 		sprite.setTexture(texture);
 		sf::FloatRect local_bounds = sprite.getLocalBounds();
 		sprite.setOrigin(local_bounds.width / 2.f, local_bounds.height / 2.f);
-		sprite.setScale(0.12f, 0.12f);
+		sprite.setScale(0.08f,0.08f);
 		sprite.setRotation(90.f);
 		sf::FloatRect global_bounds = sprite.getGlobalBounds();
 		sprite.setPosition(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT-global_bounds.height /2 - 20);
@@ -33,11 +33,11 @@ public:
 		}
 		sprite.move(speed);
 		sf::Vector2f curr_position = sprite.getPosition();
-		if (curr_position.x <= getHitBox().width / 2) {
-			sprite.setPosition(getHitBox().width / 2, curr_position.y);
+		if (curr_position.x <= 156.f) {
+			sprite.setPosition(156.f, curr_position.y);
 		}
-		else if (curr_position.x >= WINDOW_WIDTH - getHitBox().width / 2) {
-			sprite.setPosition(WINDOW_WIDTH - getHitBox().width / 2, curr_position.y);
+		else if (curr_position.x >= WINDOW_WIDTH - 156.f) {
+			sprite.setPosition(WINDOW_WIDTH - 156.f, curr_position.y);
 		}
 	}
 };
