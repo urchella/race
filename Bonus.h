@@ -6,8 +6,9 @@ private:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::Vector2f speed = sf::Vector2f(0.0f, 3.0f);
-	int chance = rand() % 10000;
-	int num = rand() % 4;
+	int chance;
+	
+	int num;
 public:
 	Bonus(){
 		texture.loadFromFile("benz.png");
@@ -16,11 +17,16 @@ public:
 	}
 	sf::Sprite getSprite() { return sprite; }
 	void setPosition(float startx, float starty) {sprite.setPosition(startx, starty); }
-	void init(float startx, float starty) { sprite.setPosition(startx, starty); }
+	//void init(float startx, float starty) { sprite.setPosition(startx, starty); }
 	sf::FloatRect getHitBox() { return sprite.getGlobalBounds(); }
 	void update() {
 		sprite.move(speed);
+		
+		num = rand() % 4;
 	}
+	void setChance(int number) { chance = number; }
 	int getChance() { return chance; }
 	int getNum() { return num; }
+	void setNum(int number) { num = number; }
+
 };

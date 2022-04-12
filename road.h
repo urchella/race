@@ -23,11 +23,14 @@ public:
 		if (sprite.getPosition().y >= WINDOW_HEIGHT) {
 			sprite.setPosition(0.f, -WINDOW_HEIGHT);
 		}
-
-		if (sum_score >=1 && road == false) {
-			texture.loadFromFile("dorozhka mefa2.jpeg");
-			sprite.setTexture(texture);
-				road = true;
-		}
 	}
+	bool getNewRoadVisible() { return road; }
+	void setNewRoadVisible(bool x) { road = x; }
+	void setNewTexture() {
+		texture.loadFromFile("море.jpg");
+		sprite.setScale(0.75f, 1.88f);
+		sprite.setTexture(texture);
+		road = true;
+	}
+
 };

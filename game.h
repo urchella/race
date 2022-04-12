@@ -9,12 +9,13 @@
 #include "new_rg.h"
 #include "Bonus.h"
 #include "GAME_OVER.h"
-
+#include "mahina.h"
 class Game {
 public:
 	enum GameState { SPLASH,NEW_REGION, PLAY, GAME_OVER };
 	Game();
 	void play();
+	int  getSumScore();
 private:
 	sf::RenderWindow window;
 	GameState game_state = SPLASH;
@@ -22,6 +23,7 @@ private:
 	GameOver game_over;
 	//Score score;
 	Bonus bonus;
+	Mahina mahina;
 	Car car;
 	TextObj text;
 	Region region;

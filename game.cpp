@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
 
-Game::Game():text(500.f, 50.f, 50, sf::Color::Yellow) {
+Game::Game() :text(500.f, 50.f, 50, sf::Color::Yellow) {
 	window.create(
 		sf::VideoMode(
 			static_cast<size_t>(WINDOW_WIDTH),
@@ -24,14 +24,14 @@ void Game::check_events() {
 				if (game_state == SPLASH) game_state = PLAY;
 		if (event.type == sf::Event::KeyPressed)
 			if (event.key.code == sf::Keyboard::Q)
-				if (game_state == NEW_REGION && new_region ) game_state = PLAY;
+				if (game_state == NEW_REGION && new_region) game_state = PLAY;
 	}
-	
-	
-	
+
+
+
 };
-void Game::update() { 
-	
+void Game::update() {
+
 	switch (game_state) {
 	case SPLASH:
 		break;
@@ -41,19 +41,35 @@ void Game::update() {
 		road2.update();
 		bonus.update();
 		sum_score = 0;
+		int number;
+		int num;
 		for (int i = 0; i < OBS_QTY; i++) {
 			obs[i].update();
 			sum_score += obs[i].getScore();
-			if (obs[i].getPosition().y >= WINDOW_HEIGHT&& bonus.getChance() <1500) {
-				bonus.setPosition(static_cast<float>(156 + 72 * bonus.getNum()), 0.f);
+			if (obs[i].getPosition().y >= WINDOW_HEIGHT) {
+				bonus.setChance(rand() % 10000);
+				if (bonus.getChance() < 5000) {
+					bonus.setNum(rand() % 4);
+					bonus.setPosition(static_cast<float>(156 + 72 * bonus.getNum()), 0.f);
+				}
 			}
 		}
 		text.update(std::to_string(sum_score));
 		if (sum_score == 1 && !new_region) {
 			game_state = NEW_REGION;
 			new_region = true;
-		}
-		break;
+			if (!road1.getNewRoadVisible() && !road2.getNewRoadVisible()) {
+				road1.setNewTexture();
+				road2.setNewTexture();
+				road1.setNewRoadVisible(true);
+				road2.setNewRoadVisible(true);
+			};
+			if (!car.getNewKaterVisible()) {
+				car.setNewTexture();
+				car.setNewKaterVisible(true);
+			
+			};
+			break;
 	case NEW_REGION:
 
 		break;
@@ -61,6 +77,7 @@ void Game::update() {
 		break;
 	default:
 		break;
+		}
 	}
 };
 void Game::draw() {
@@ -116,3 +133,4 @@ void Game::play() {
 		draw();
 	}
 }
+int Game::getSumScore() { return sum_score; }
