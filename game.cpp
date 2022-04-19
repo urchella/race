@@ -12,7 +12,8 @@ Game::Game() :text(500.f, 50.f, 50, sf::Color::Yellow) {
 	road1.init(0.f, 0.f);
 	road2.init(0.f, -WINDOW_HEIGHT);
 	for (int i = 0; i < OBS_QTY; i++) {
-		obs[i].init(i * 150.f, -i * WINDOW_HEIGHT / 2.f);
+		obs[OBS_QTY].setChance(rand() % 1000 * -1);
+		obs[i].init(i * 150.f, obs[OBS_QTY].getChance());
 	}
 }
 void Game::check_events() {
@@ -39,7 +40,6 @@ void Game::update() {
 		car.update();
 		road1.update();
 		road2.update();
-		bonus.update();
 		sum_score = 0;
 		int number;
 		int num;
@@ -47,6 +47,7 @@ void Game::update() {
 			obs[i].update();
 			sum_score += obs[i].getScore();
 			if (obs[i].getPosition().y >= WINDOW_HEIGHT) {
+
 				bonus.setChance(rand() % 10000);
 				if (bonus.getChance() < 5000) {
 					bonus.setNum(rand() % 4);
@@ -54,6 +55,8 @@ void Game::update() {
 				}
 			}
 		}
+		
+		bonus.update();
 		text.update(std::to_string(sum_score));
 		if (sum_score == 1 && !new_region) {
 			game_state = NEW_REGION;
@@ -67,8 +70,9 @@ void Game::update() {
 			if (!car.getNewKaterVisible()) {
 				car.setNewTexture();
 				car.setNewKaterVisible(true);
-			
+
 			};
+		}
 			break;
 	case NEW_REGION:
 
@@ -79,7 +83,6 @@ void Game::update() {
 		break;
 		}
 	}
-};
 void Game::draw() {
 	switch (game_state) {
 	case SPLASH:

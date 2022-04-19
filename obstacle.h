@@ -8,6 +8,7 @@ private:
 	sf::Sprite sprite;
 	sf::Vector2f speed = sf::Vector2f(0.0f, 3.0f);
 	int score = 0;
+	int chance;
 	int num = rand() % 4;
 public:
 	Obstacle() {
@@ -22,11 +23,14 @@ public:
 	void update() {
 		sprite.move(speed);
 		if (sprite.getPosition().y >= WINDOW_HEIGHT) {
-			sprite.setPosition(static_cast<float>(156 + 72 * num), 0.f);
+			setChance(rand() % 1000 * -1);
+			sprite.setPosition(static_cast<float>(156 + 72 * num), getChance());
 			score++;
 		}
 	}
 	int getScore() { return score; }
+	void setChance(int number) { chance = number; }
+	int getChance() { return chance; }
 };
 
 

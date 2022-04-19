@@ -23,7 +23,7 @@ private:
 	GameOver game_over;
 	//Score score;
 	Bonus bonus;
-	Mahina mahina;
+	Mashina mashina;
 	Car car;
 	TextObj text;
 	Region region;

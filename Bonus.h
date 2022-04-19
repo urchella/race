@@ -7,7 +7,6 @@ private:
 	sf::Sprite sprite;
 	sf::Vector2f speed = sf::Vector2f(0.0f, 3.0f);
 	int chance;
-	
 	int num;
 public:
 	Bonus(){

@@ -26,7 +26,7 @@ public:
 	void update() {
 		speed = sf::Vector2f(0.f, 0.f);
 		if (sum_score >= 1 && kater == false) {
-			texture.loadFromFile("dorozhka mefa2.jpeg");
+			texture.loadFromFile("kater.jpeg");
 			sprite.setTexture(texture);
 			kater = true;
 		}
