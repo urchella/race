@@ -20,17 +20,18 @@ public:
 	sf::Vector2f getPosition() { return sprite.getPosition(); }
 	void init(float startx, float starty) { sprite.setPosition(startx, starty); }
 	sf::FloatRect getHitBox() { return sprite.getGlobalBounds(); }
+	int getScore() { return score; }
+	void setScore(int sc) { score = sc; }
+	void setChance(int number) { chance = number; }
+	int getChance() { return chance; }
+	void setPosition(float x, float y) { sprite.setPosition(x, y); }
 	void update() {
 		sprite.move(speed);
 		if (sprite.getPosition().y >= WINDOW_HEIGHT) {
-			setChance(rand() % 1000 * -1);
-			sprite.setPosition(static_cast<float>(156 + 72 * num), getChance());
-			score++;
+			
 		}
 	}
-	int getScore() { return score; }
-	void setChance(int number) { chance = number; }
-	int getChance() { return chance; }
+	
 };
 
 

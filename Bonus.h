@@ -20,8 +20,6 @@ public:
 	sf::FloatRect getHitBox() { return sprite.getGlobalBounds(); }
 	void update() {
 		sprite.move(speed);
-		
-		num = rand() % 4;
 	}
 	void setChance(int number) { chance = number; }
 	int getChance() { return chance; }

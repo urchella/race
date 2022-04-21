@@ -47,6 +47,11 @@ void Game::update() {
 			obs[i].update();
 			sum_score += obs[i].getScore();
 			if (obs[i].getPosition().y >= WINDOW_HEIGHT) {
+				//забрали из update() obstacle и вставили сюда
+				obs[i].setChance(rand() % 1000);
+				num = rand() % 4;
+				obs[i].setPosition(static_cast<float>(156 + 72 * num), -1*obs[i].getChance());
+				obs[i].setScore(obs[i].getScore() + 1);
 
 				bonus.setChance(rand() % 10000);
 				if (bonus.getChance() < 5000) {
@@ -96,12 +101,11 @@ void Game::draw() {
 		window.draw(road1.getSprite());
 		window.draw(road2.getSprite());
 		window.draw(car.getSprite());
-		window.draw(bonus.getSprite());
 		text.draw(window);
 		for (int i = 0; i < OBS_QTY; i++) {
 			window.draw(obs[i].getSprite());
 		}
-
+		window.draw(bonus.getSprite());
 		window.display();
 
 		break;
